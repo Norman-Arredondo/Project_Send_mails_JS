@@ -26,7 +26,7 @@ function eventListeners() {
 
 function iniciarApp() {
     btnEnviar.disabled = true;
-    btnEnviar.classList.add('cursor-not-allowed', 'opacity-10');
+    //btnEnviar.classList.add('cursor-not-allowed', 'opacity-10');
 }
 
 //Valida el formulario
