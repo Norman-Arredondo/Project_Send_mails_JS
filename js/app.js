@@ -1,5 +1,6 @@
 /**Variables */
 const btnEnviar = document.querySelector('#enviar');
+const fromulario = document.querySelector('#enviar-mail');
 
 
 /**Variables para campos */
@@ -37,7 +38,22 @@ function validarFormulario(e) {
     } else {
         //e.target.style.borderBottomColor = 'red';
         e.target.classList.add('border','border-red-500');
+
+        mostrarError();
     }
 }
 
+
+function mostrarError() {
+    const mensajeError = document.createElement('p');
+    mensajeError.textContent = 'Todos los campos son obligatorios';
+    mensajeError.classList.add('border','border-red-500', 'background-red-100', 'text-red-500', 'p-3', 'mb-5','text-center', 'error');
+
+    //Buscamos que ya no haya más clases de .error, como se crean varias veces, se crean más clases 
+    const errores = document.querySelectorAll('.error'); //querySelector para un sólo elemento y .lenght sólo con querySelectorAll
+    if(errores.length === 0) {
+        fromulario.insertBefore(mensajeError, document.querySelector('.mb-10'));
+    }
+   
+}
 
