@@ -1,6 +1,7 @@
 /**Variables */
 const btnEnviar = document.querySelector('#enviar');
 const fromulario = document.querySelector('#enviar-mail');
+const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
 /**Variables para campos */
@@ -27,7 +28,7 @@ function eventListeners() {
 
 function iniciarApp() {
     btnEnviar.disabled = true;
-    //btnEnviar.classList.add('cursor-not-allowed', 'opacity-10');
+    btnEnviar.classList.add('cursor-not-allowed', 'opacity-50');
 }
 
 //Valida el formulario
@@ -40,10 +41,10 @@ function validarFormulario(e) {
 
         //Elimina los errores...
         const error = document.querySelector('p.error');
-        if(error) {
+        if (error) {
             error.remove();
         }
-        
+
         e.target.classList.remove('border', 'border-red-500');
         e.target.classList.add('border', 'border-green-500');
     } else {
@@ -55,20 +56,19 @@ function validarFormulario(e) {
     }
 
     if (e.target.type === 'email') {
-
-        const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        // e.target hace referencia al campo actual
 
         if (er.test(e.target.value)) {
             // Elimina los errores...
             const error = document.querySelector('p.error');
 
-            if(error){
+            if (error) {
                 error.remove();
             }
-            
+
             e.target.classList.remove('border', 'border-red-500');
             e.target.classList.add('border', 'border-green-500');
-            
+
         } else {
             e.target.classList.remove('border', 'border-green-500');
             e.target.classList.add('border', 'border-red-500');
@@ -76,6 +76,13 @@ function validarFormulario(e) {
             mostrarError('Email no válido');
         }
 
+    }
+
+    // El primero hace referencia a los valores que tenemos declarados en la parte superior 
+    if (er.test(email.value) !== '' && asunto.value !== '' && mensaje.value !== '') {
+        btnEnviar.disabled = false;
+        btnEnviar.classList.remove('cursor-not-allowed', 'opacity-50');
+        
     }
 }
 
