@@ -1,6 +1,7 @@
 /**Variables */
 const btnEnviar = document.querySelector('#enviar');
 const fromulario = document.querySelector('#enviar-mail');
+const btnReset = document.querySelector('#resetBtn');
 const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
@@ -21,6 +22,11 @@ function eventListeners() {
     asunto.addEventListener('blur', validarFormulario);
     mensaje.addEventListener('blur', validarFormulario);
 
+    // Reinicia el formulario
+    btnReset.addEventListener('click', resetearFormulario);
+
+    //Enviar Email
+    fromulario.addEventListener('submit', enviarEmails);
 }
 
 
@@ -100,3 +106,38 @@ function mostrarError(mensaje) {
 
 }
 
+// Envía el email
+function enviarEmails(e) {
+    e.preventDefault();
+
+    // Mostrar el spinner 
+    const spinner = document.querySelector('#spinner');
+    spinner.style.display = 'flex';
+
+    // Después de 3 seg. ocultar el spinner y mostrar el mensaje
+
+    // Existen 2 formas de crear spinners, Settimeout(se ejecuta una vez) ,Setinteval(se ejecuca cada vez en un intervalo de tiempo)
+
+    setTimeout(() => {
+        spinner.style.display = 'none';
+
+        // Mensaje que se envió 
+        const parrafo = document.createElement('p');
+        parrafo.textContent = 'El mensaje se envió correctamente';
+        parrafo.classList.add('text-center', 'my-10', 'p-2', 'bg-green-500', 'text-white', 'fontbold', 'uppercase');
+
+        //Inserta el párrafo antes del sínner
+        fromulario.insertBefore(parrafo, spinner);
+
+        setTimeout(() => {
+            parrafo.remove(); // Eliminar el mensaje de éxito
+            resetearFormulario();
+        }, 2000);
+    }, 2000);
+}
+
+//Funtion que resetea el formulario
+function resetearFormulario () {
+    fromulario.reset();
+    iniciarApp();
+}
