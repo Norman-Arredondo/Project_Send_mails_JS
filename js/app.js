@@ -40,8 +40,10 @@ function validarFormulario(e) {
 
         //Elimina los errores...
         const error = document.querySelector('p.error');
-        error.remove();
-
+        if(error) {
+            error.remove();
+        }
+        
         e.target.classList.remove('border', 'border-red-500');
         e.target.classList.add('border', 'border-green-500');
     } else {
@@ -57,10 +59,13 @@ function validarFormulario(e) {
         const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         if (er.test(e.target.value)) {
-            //Elimina los errores...
+            // Elimina los errores...
             const error = document.querySelector('p.error');
-            error.remove();
 
+            if(error){
+                error.remove();
+            }
+            
             e.target.classList.remove('border', 'border-red-500');
             e.target.classList.add('border', 'border-green-500');
             
